@@ -600,11 +600,15 @@
       font-weight: 600;
       font-size: 18px;
       letter-spacing: 0.02em;
+      line-height: 1.4;
+      text-align: center;
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      align-content: center;
       gap: 10px;
+      white-space: normal;
     }
 
     .btn:hover { transform: translateY(-2px); }
@@ -746,7 +750,14 @@
       .hero-main, .hero-side, .info-card, .full-card { padding: 18px; }
       .hero h1 { font-size: clamp(30px, 9vw, 40px); line-height: 1.05; }
       .hero-subtitle { font-size: 24px; line-height: 1.35; }
+
       .btn { width: 100%; }
+      .hero-actions .btn, .info-card .btn {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+      }
       .hero-actions { flex-direction: column; }
       .boot-shell { min-height: 78vh; padding: 16px; }
       .boot-topbar { font-size: 9px; line-height: 1.4; }
