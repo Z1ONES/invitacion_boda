@@ -605,6 +605,9 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
+      text-align: center;
+      white-space: normal;
+      line-height: 1.25;
     }
 
     .btn:hover { transform: translateY(-2px); }
@@ -766,7 +769,15 @@
       .path-2 { width: 140px; }
       .hero-pill span { font-size: 11px; }
       .hero-pill strong { font-size: 26px; }
-      .btn { font-size: 14px; line-height: 1.5; }
+      .btn {
+        width: 100%;
+        font-size: 14px;
+        line-height: 1.25;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        white-space: normal;
+      }
       .status-row strong { font-size: 16px; }
       .status-row span { font-size: 18px; }
       .section-head p { font-size: 21px; line-height: 1.35; }
@@ -1058,52 +1069,6 @@
         max-height: 42px;
       }
     }
-  
-
-    .sweep-text {
-      position: relative;
-      display: inline-block;
-      overflow: hidden;
-      isolation: isolate;
-    }
-
-    .sweep-text::after {
-      content: "";
-      position: absolute;
-      inset: -8% auto -8% -140%;
-      width: 55%;
-      background: linear-gradient(
-        110deg,
-        transparent 0%,
-        rgba(255,255,255,0) 18%,
-        rgba(255,248,212,0.15) 34%,
-        rgba(255,255,255,0.7) 50%,
-        rgba(255,248,212,0.15) 66%,
-        rgba(255,255,255,0) 82%,
-        transparent 100%
-      );
-      transform: skewX(-18deg);
-      pointer-events: none;
-      mix-blend-mode: screen;
-      animation: textSweep 4.8s ease-in-out infinite;
-    }
-
-    .btn.sweep-text::after {
-      inset: 8% auto 8% -140%;
-      width: 42%;
-      border-radius: 12px;
-    }
-
-    @keyframes textSweep {
-      0%, 42% { left: -140%; }
-      58% { left: 145%; }
-      100% { left: 145%; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .sweep-text::after { animation: none; }
-    }
-
   </style>
 </head>
 <body>
@@ -1150,7 +1115,7 @@
             <div class="pixel-corner"></div>
             <div class="pixel-corner corner-r"></div>
             <div class="terminal-tag">LOGRO DESBLOQUEADO</div>
-            <h1 class="sweep-text">Flor & Keke</h1>
+            <h1>Flor & Keke</h1>
             <h3>
               Después de miles de códigos compartidos, viajes, risas y versiones de nosotros mismos,
               llegó el momento de ejecutar el evento más importante de nuestra historia.
@@ -1168,7 +1133,7 @@
             </div>
 
             <div class="hero-actions">
-              <a class="btn btn-primary sweep-text" href="#detalles">Ver detalles del evento</a>
+              <a class="btn btn-primary" href="#detalles">Ver detalles del evento</a>
             </div>
           </article>
 
@@ -1292,7 +1257,7 @@
               Si tenes alergias o alguna restriccion alimentaria, contanos asi lo tenemos en cuenta:
             </p>
             <div class="hero-actions" style="margin-top:20px;">
-              <a class="btn btn-primary sweep-text" href="https://forms.gle/66s8hfL8nAyHzSjg8">Configura tu jugador</a>
+              <a class="btn btn-primary" href="https://forms.gle/66s8hfL8nAyHzSjg8">Configura tu jugador</a>
             </div>
           </article>
            <article class="info-card glass-card">
