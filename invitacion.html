@@ -1181,7 +1181,239 @@
       }
     }
 
-  </style>
+  
+
+    /* Ajustes correctivos mobile + fondo estable */
+    html, body {
+      min-height: 100%;
+      background-color: #f5eddc;
+    }
+
+    body {
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    .bg-fixed,
+    .decor-fixed {
+      pointer-events: none;
+      width: 100vw;
+      height: 100dvh;
+      min-height: 100svh;
+      background-repeat: no-repeat !important;
+      background-position: center top !important;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: transform;
+    }
+
+    .bg-fixed {
+      background-size: cover !important;
+    }
+
+    .decor-fixed {
+      background-size: cover !important;
+      opacity: 0.34;
+      mix-blend-mode: normal;
+    }
+
+    #invitation,
+    .content-layer {
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 768px) {
+      .wrap {
+        width: min(100% - 24px, 1180px) !important;
+      }
+
+      .section {
+        padding: 18px 0 26px !important;
+      }
+
+      .section + .section {
+        padding-top: 6px !important;
+      }
+
+      .hero {
+        padding: 12px 0 28px !important;
+      }
+
+      .hero-panel,
+      .cards-grid,
+      .hero-actions,
+      .status-grid,
+      .countdown-grid {
+        gap: 12px !important;
+      }
+
+      .hero-main,
+      .hero-side,
+      .info-card,
+      .full-card,
+      .countdown-card,
+      .status-card,
+      .quote-card {
+        padding: 16px !important;
+        border-radius: 20px !important;
+      }
+
+      .terminal-tag {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 12px 10px !important;
+        font-size: 9px !important;
+        line-height: 1.5 !important;
+      }
+
+      .hero h1 {
+        font-size: clamp(28px, 8.5vw, 38px) !important;
+        line-height: 1.08 !important;
+        margin-bottom: 14px !important;
+      }
+
+      .hero-subtitle {
+        font-size: 22px !important;
+        line-height: 1.28 !important;
+        margin-bottom: 18px !important;
+      }
+
+      .hero-data {
+        gap: 10px !important;
+        margin-bottom: 18px !important;
+      }
+
+      .hero-pill {
+        min-width: calc(50% - 5px) !important;
+        flex: 1 1 calc(50% - 5px);
+        padding: 10px 12px !important;
+        border-radius: 14px !important;
+      }
+
+      .hero-pill strong,
+      .status-row span,
+      .section-head p,
+      .countdown-copy,
+      .info-card p,
+      .info-card li,
+      .timeline-item p,
+      .quote-card small,
+      .footer-note,
+      .btn {
+        font-size: 20px !important;
+        line-height: 1.28 !important;
+      }
+
+      .hero-pill span,
+      .status-row strong,
+      label {
+        font-size: 15px !important;
+        line-height: 1.2 !important;
+      }
+
+      .section-head {
+        gap: 10px !important;
+        margin-bottom: 18px !important;
+      }
+
+      .section-head h2,
+      .info-card h3,
+      .countdown-title {
+        font-size: clamp(20px, 5.5vw, 28px) !important;
+        line-height: 1.2 !important;
+      }
+
+      .card-top {
+        gap: 10px !important;
+        margin-bottom: 14px !important;
+      }
+
+      .info-card ul {
+        gap: 6px !important;
+      }
+
+      .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 13px 14px !important;
+        border-radius: 14px !important;
+      }
+
+      .status-row {
+        align-items: flex-start !important;
+        gap: 8px !important;
+        padding-bottom: 8px !important;
+      }
+
+      .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      .count-box {
+        padding: 14px 10px !important;
+        border-radius: 16px !important;
+      }
+
+      .count-box strong {
+        font-size: 14px !important;
+        margin-bottom: 8px !important;
+      }
+
+      .count-box span {
+        font-size: 14px !important;
+      }
+
+      .music-btn {
+        top: auto !important;
+        right: 12px !important;
+        bottom: 12px !important;
+        padding: 10px 12px !important;
+        font-size: 8px !important;
+        max-width: calc(100vw - 24px);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .bg-fixed,
+      .decor-fixed {
+        position: fixed !important;
+        inset: 0 !important;
+      }
+
+      .bg-fixed {
+        background-size: cover !important;
+        background-position: center center !important;
+      }
+
+      .decor-fixed {
+        background-size: cover !important;
+        background-position: center center !important;
+        opacity: 0.22 !important;
+      }
+
+      .hero-pill {
+        min-width: 100% !important;
+        flex-basis: 100% !important;
+      }
+
+      .quote-card p {
+        font-size: 22px !important;
+        line-height: 1.18 !important;
+      }
+
+      .terminal-tag,
+      .mini-label,
+      .card-code {
+        letter-spacing: 0.04em !important;
+      }
+    }
+
+</style>
 </head>
 <body>
 <div class="bg-fixed"></div>
