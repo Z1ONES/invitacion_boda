@@ -890,18 +890,68 @@
       }
     }
 
+  
+
+    /* Ajustes mobile del index */
+    .music-btn { display: none !important; }
+
+    @media (max-width: 640px) {
+      #boot-screen {
+        padding: 12px;
+        align-items: flex-start;
+      }
+
+      .boot-shell {
+        width: 100%;
+        min-height: auto;
+        height: auto;
+        margin-top: 72px;
+        padding: 14px 12px 18px;
+        border-radius: 18px;
+      }
+
+      .boot-topbar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        align-items: start;
+        font-size: 8px;
+        line-height: 1.45;
+        padding-bottom: 12px;
+        margin-bottom: 14px;
+      }
+
+      .boot-topbar span:last-child {
+        text-align: right;
+      }
+
+      .boot-content {
+        font-size: 9px;
+        line-height: 1.72;
+        min-height: 240px;
+      }
+
+      .boot-enter {
+        margin-top: 12px;
+        font-size: 9px;
+        line-height: 1.45;
+      }
+
+      .cursor {
+        width: 8px;
+        margin-left: 4px;
+      }
+    }
+
   </style>
 </head>
 <body>
 <div class="bg-fixed"></div>
   <div class="decor-fixed"></div>
   <div class="content-layer">
-
-  <audio id="bg-music" loop preload="none">
-    <source src="./musica/musica.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
+  <audio id="typing-sfx" preload="auto" loop>
+    <source src="./musica/musica1.mp3" type="audio/mpeg">
   </audio>
-  <button id="music-toggle" class="music-btn" type="button">🎵 Activar música</button>
 <section id="boot-screen">
     <div class="boot-shell">
       <div class="boot-topbar">
@@ -954,6 +1004,10 @@
 
     function openInvitation() {
       if (!bootFinished) return;
+      if (typingSfx) {
+        typingSfx.pause();
+        typingSfx.currentTime = 0;
+      }
       window.location.href = 'invitacion.html';
     }
 
@@ -965,30 +1019,27 @@
     });
 
     bootScreen.addEventListener('click', openInvitation);
+    const typingSfx = document.getElementById('typing-sfx');
+    let typingAudioEnabled = false;
 
-    const music = document.getElementById('bg-music');
-    const musicToggle = document.getElementById('music-toggle');
-    let musicOn = false;
-
-    async function toggleMusic() {
-      try {
-        if (!musicOn) {
-          await music.play();
-          musicOn = true;
-          musicToggle.textContent = '🎵 Pausar música';
-          musicToggle.classList.add('is-playing');
-        } else {
-          music.pause();
-          musicOn = false;
-          musicToggle.textContent = '🎵 Activar música';
-          musicToggle.classList.remove('is-playing');
-        }
-      } catch (error) {
-        console.error('No se pudo reproducir la música:', error);
+    function startTypingSound() {
+      if (typingAudioEnabled || !typingSfx) return;
+      typingSfx.volume = 0.18;
+      const playPromise = typingSfx.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+          typingAudioEnabled = true;
+        }).catch(() => {});
       }
     }
 
-    musicToggle.addEventListener('click', toggleMusic);
+    window.addEventListener('load', () => {
+      startTypingSound();
+    }, { once: true });
+
+    ['pointerdown', 'touchstart', 'keydown'].forEach((eventName) => {
+      window.addEventListener(eventName, startTypingSound, { once: true, passive: true });
+    });
   </script>
 
   </div>
