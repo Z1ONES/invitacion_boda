@@ -949,8 +949,8 @@
 <div class="bg-fixed"></div>
   <div class="decor-fixed"></div>
   <div class="content-layer">
-  <audio id="typing-sfx" preload="auto" loop>
-    <source src="./musica/musica1.mp3" type="audio/mpeg">
+  <audio id="typing-sfx" preload="auto" loop playsinline>
+    <source src="./musica/typing.mp3" type="audio/mpeg">
   </audio>
 <section id="boot-screen">
     <div class="boot-shell">
@@ -1024,21 +1024,22 @@
 
     function startTypingSound() {
       if (typingAudioEnabled || !typingSfx) return;
-      typingSfx.volume = 0.18;
+      typingSfx.volume = 0.22;
+      typingSfx.currentTime = 0;
       const playPromise = typingSfx.play();
       if (playPromise && typeof playPromise.then === 'function') {
         playPromise.then(() => {
           typingAudioEnabled = true;
-        }).catch(() => {});
+        }).catch(() => {
+          typingAudioEnabled = false;
+        });
       }
     }
 
-    window.addEventListener('load', () => {
-      startTypingSound();
-    }, { once: true });
+    window.addEventListener('load', startTypingSound, { once: true });
 
-    ['pointerdown', 'touchstart', 'keydown'].forEach((eventName) => {
-      window.addEventListener(eventName, startTypingSound, { once: true, passive: true });
+    ['pointerdown', 'touchstart', 'keydown', 'click'].forEach((eventName) => {
+      window.addEventListener(eventName, startTypingSound, { once: true });
     });
   </script>
 
