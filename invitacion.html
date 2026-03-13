@@ -545,6 +545,31 @@
       z-index: 1;
     }
 
+    .title-type-reveal {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 0;
+      max-width: 100%;
+      opacity: 0;
+      animation: titleRevealTyping 1.8s steps(11, end) 0.15s forwards;
+      will-change: width, opacity;
+    }
+
+    @keyframes titleRevealTyping {
+      0% {
+        width: 0;
+        opacity: 0.15;
+      }
+      12% {
+        opacity: 1;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
     .hero-subtitle {
       font-family: 'VT323', monospace;
       font-size: clamp(28px, 3vw, 40px);
@@ -605,9 +630,6 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      text-align: center;
-      white-space: normal;
-      line-height: 1.25;
     }
 
     .btn:hover { transform: translateY(-2px); }
@@ -769,15 +791,7 @@
       .path-2 { width: 140px; }
       .hero-pill span { font-size: 11px; }
       .hero-pill strong { font-size: 26px; }
-      .btn {
-        width: 100%;
-        font-size: 14px;
-        line-height: 1.25;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        white-space: normal;
-      }
+      .btn { font-size: 14px; line-height: 1.5; }
       .status-row strong { font-size: 16px; }
       .status-row span { font-size: 18px; }
       .section-head p { font-size: 21px; line-height: 1.35; }
@@ -1115,7 +1129,7 @@
             <div class="pixel-corner"></div>
             <div class="pixel-corner corner-r"></div>
             <div class="terminal-tag">LOGRO DESBLOQUEADO</div>
-            <h1>Flor & Keke</h1>
+            <h1 class="title-type-reveal">Flor & Keke</h1>
             <h3>
               Después de miles de códigos compartidos, viajes, risas y versiones de nosotros mismos,
               llegó el momento de ejecutar el evento más importante de nuestra historia.
