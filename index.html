@@ -943,16 +943,107 @@
       }
     }
 
+    #preboot-screen {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(244, 211, 94, 0.06), transparent 45%),
+        var(--bg-dark);
+      background-size: 100% 3px, 3px 100%, auto, auto;
+      color: var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 120;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    #preboot-screen.fade-out { opacity: 0; visibility: hidden; }
+    .preboot-content {
+      flex: 1;
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(13px, 2.2vw, 18px);
+      line-height: 2.1;
+      white-space: pre-wrap;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 18px;
+    }
+    .preboot-line {
+      display:block;
+      min-height: 1.6em;
+      text-shadow: 0 0 10px rgba(244,211,94,0.12);
+    }
+    .preboot-line.title-line {
+      font-size: clamp(15px, 2.8vw, 22px);
+      color: var(--amber-soft);
+    }
+    .preboot-progress-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: min(100%, 560px);
+    }
+    .preboot-progress {
+      color: var(--amber-soft);
+      letter-spacing: 1px;
+    }
+    .preboot-bar {
+      width: min(100%, 520px);
+      height: 18px;
+      border: 1px solid rgba(244, 211, 94, 0.35);
+      background: rgba(244, 211, 94, 0.07);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 0 18px rgba(244,211,94,0.05);
+      padding: 2px;
+    }
+    .preboot-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(244,211,94,0.6), rgba(255,233,168,0.9));
+      box-shadow: 0 0 12px rgba(244,211,94,0.18);
+      transition: width .22s steps(10, end);
+    }
+    .preboot-enter {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: .35s ease;
+      color: var(--amber-soft);
+      font-size: clamp(10px, 1.5vw, 12px);
+    }
+    .preboot-enter.visible { opacity: 1; transform: translateY(0); }
+
   </style>
 </head>
 <body>
 <div class="bg-fixed"></div>
   <div class="decor-fixed"></div>
   <div class="content-layer">
-  <audio id="typing-sfx" preload="auto" loop playsinline>
+  <audio id="typing-sfx" preload="auto" playsinline>
     <source src="./musica/typing.mp3" type="audio/mpeg">
   </audio>
-<section id="boot-screen">
+<section id="preboot-screen">
+    <div class="boot-shell">
+      <div class="boot-topbar">
+        <span>CASAMIENTO-TROYANO v14.11.2026</span>
+        <span class="boot-status">BOOTLOADER ONLINE</span>
+      </div>
+      <div class="preboot-content">
+        <span id="preboot-line-1" class="preboot-line title-line"></span>
+        <span id="preboot-line-2" class="preboot-line"></span>
+        <div class="preboot-progress-wrap">
+          <div class="preboot-bar"><div id="preboot-bar-fill" class="preboot-bar-fill"></div></div>
+          <span id="preboot-line-3" class="preboot-line preboot-progress"></span>
+        </div>
+        <div id="preboot-enter" class="preboot-enter">Presione ENTER o toque la pantalla para continuar <span class="cursor"></span></div>
+      </div>
+    </div>
+  </section>
+
+<section id="boot-screen" class="hidden">
     <div class="boot-shell">
       <div class="boot-topbar">
         <span>CASAMIENTO-TROYANO v14.11.2026</span>
@@ -976,10 +1067,24 @@
       'Ejecutando: boda_14_11_2026.exe'
     ];
 
+    const prebootScreen = document.getElementById('preboot-screen');
+    const prebootEnter = document.getElementById('preboot-enter');
+    const prebootLine1 = document.getElementById('preboot-line-1');
+    const prebootLine2 = document.getElementById('preboot-line-2');
+    const prebootLine3 = document.getElementById('preboot-line-3');
+    const prebootBarFill = document.getElementById('preboot-bar-fill');
     const bootText = document.getElementById('boot-text');
     const bootEnter = document.getElementById('boot-enter');
     const bootScreen = document.getElementById('boot-screen');
+    const typingSfx = document.getElementById('typing-sfx');
+
+    const prebootLines = [
+      'CASAMIENTO-TROYANO',
+      'Cargando entorno...'
+    ];
+
     let bootFinished = false;
+    let bootStarted = false;
     let lineIndex = 0;
     let charIndex = 0;
 
@@ -1002,6 +1107,30 @@
       }
     }
 
+    function startTypingSound() {
+      if (!typingSfx) return;
+      typingSfx.volume = 0.22;
+      typingSfx.currentTime = 0;
+      const playPromise = typingSfx.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    }
+
+    function startOriginalBoot() {
+      if (bootStarted) return;
+      bootStarted = true;
+      startTypingSound();
+      bootScreen.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        prebootScreen.classList.add('fade-out');
+      });
+      setTimeout(() => {
+        prebootScreen.classList.add('hidden');
+        typeBoot();
+      }, 620);
+    }
+
     function openInvitation() {
       if (!bootFinished) return;
       if (typingSfx) {
@@ -1011,36 +1140,68 @@
       window.location.href = 'invitacion.html';
     }
 
+    function typePrebootLine(element, text, speed = 42) {
+      return new Promise((resolve) => {
+        let i = 0;
+        const tick = () => {
+          if (i <= text.length) {
+            element.textContent = text.slice(0, i);
+            i += 1;
+            setTimeout(tick, speed);
+          } else {
+            resolve();
+          }
+        };
+        tick();
+      });
+    }
+
+    function animatePrebootProgress() {
+      return new Promise((resolve) => {
+        let step = 0;
+        const total = 10;
+        const tick = () => {
+          step += 1;
+          prebootBarFill.style.width = `${step * 10}%`;
+          prebootLine3.textContent = `${'█'.repeat(step)}${'░'.repeat(total - step)} ${step * 10}%`;
+          if (step < total) {
+            setTimeout(tick, 95);
+          } else {
+            prebootLine3.textContent = '██████████ 100%';
+            resolve();
+          }
+        };
+        tick();
+      });
+    }
+
+    async function runPrebootIntro() {
+      await typePrebootLine(prebootLine1, prebootLines[0], 46);
+      await new Promise((r) => setTimeout(r, 180));
+      await typePrebootLine(prebootLine2, prebootLines[1], 38);
+      await new Promise((r) => setTimeout(r, 180));
+      await animatePrebootProgress();
+      await new Promise((r) => setTimeout(r, 120));
+      prebootEnter.classList.add('visible');
+    }
+
     document.body.style.overflow = 'hidden';
-    typeBoot();
+    runPrebootIntro();
 
     window.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (!bootStarted) {
+          e.preventDefault();
+          startOriginalBoot();
+          return;
+        }
+      }
       if (e.key === 'Enter') openInvitation();
     });
 
+    prebootScreen.addEventListener('click', startOriginalBoot);
+    prebootScreen.addEventListener('touchstart', startOriginalBoot, { passive: true });
     bootScreen.addEventListener('click', openInvitation);
-    const typingSfx = document.getElementById('typing-sfx');
-    let typingAudioEnabled = false;
-
-    function startTypingSound() {
-      if (typingAudioEnabled || !typingSfx) return;
-      typingSfx.volume = 0.22;
-      typingSfx.currentTime = 0;
-      const playPromise = typingSfx.play();
-      if (playPromise && typeof playPromise.then === 'function') {
-        playPromise.then(() => {
-          typingAudioEnabled = true;
-        }).catch(() => {
-          typingAudioEnabled = false;
-        });
-      }
-    }
-
-    window.addEventListener('load', startTypingSound, { once: true });
-
-    ['pointerdown', 'touchstart', 'keydown', 'click'].forEach((eventName) => {
-      window.addEventListener(eventName, startTypingSound, { once: true });
-    });
   </script>
 
   </div>
