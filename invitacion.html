@@ -545,27 +545,6 @@
       z-index: 1;
     }
 
-    .hero h1.typewriter-title {
-      text-wrap: nowrap;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      max-width: fit-content;
-      margin-left: auto;
-      margin-right: auto;
-      border-right: 3px solid rgba(48, 38, 29, 0.9);
-      animation: florKekeTyping 2.2s steps(11, end) 0.35s forwards, florKekeCursor 0.9s step-end 0.35s 6;
-    }
-
-    @keyframes florKekeTyping {
-      from { width: 0; }
-      to { width: 11ch; }
-    }
-
-    @keyframes florKekeCursor {
-      50% { border-right-color: transparent; }
-    }
-
     .hero-subtitle {
       font-family: 'VT323', monospace;
       font-size: clamp(28px, 3vw, 40px);
@@ -769,9 +748,6 @@
       .wrap { width: min(100% - 20px, 1180px); }
       .hero-main, .hero-side, .info-card, .full-card { padding: 18px; }
       .hero h1 { font-size: clamp(30px, 9vw, 40px); line-height: 1.05; }
-      .hero h1.typewriter-title {
-        font-size: clamp(28px, 8.4vw, 40px);
-      }
       .hero-subtitle { font-size: 24px; line-height: 1.35; }
       .btn { width: 100%; }
       .hero-actions { flex-direction: column; }
@@ -1093,6 +1069,78 @@
         max-height: 42px;
       }
     }
+  
+    /* Ajuste visual sutil: entrada de bloques + microinteracción en botones */
+    .hero-main.reveal,
+    .hero-side.reveal,
+    .countdown-section.reveal,
+    .section-head.reveal,
+    .footer-note.reveal {
+      transform: translateY(18px);
+      transition: opacity 0.85s ease, transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .info-card {
+      transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.28s ease,
+        border-color 0.28s ease;
+    }
+
+    .btn {
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease,
+        filter 0.22s ease;
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.08) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.22s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      filter: saturate(1.03);
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 18px 34px rgba(244, 211, 94, 0.42);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 12px 26px rgba(64, 54, 32, 0.12);
+    }
+
+    .btn:active {
+      transform: translateY(-1px) scale(0.995);
+    }
+
+    @media (max-width: 640px) {
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn-primary:hover,
+      .btn-secondary:hover {
+        box-shadow: inherit;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1139,7 +1187,7 @@
             <div class="pixel-corner"></div>
             <div class="pixel-corner corner-r"></div>
             <div class="terminal-tag">LOGRO DESBLOQUEADO</div>
-            <h1 class="typewriter-title">Flor &amp; Keke</h1>
+            <h1>Flor & Keke</h1>
             <h3>
               Después de miles de códigos compartidos, viajes, risas y versiones de nosotros mismos,
               llegó el momento de ejecutar el evento más importante de nuestra historia.
