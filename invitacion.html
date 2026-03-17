@@ -22,14 +22,33 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      min-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      background-color: #f5eddc;
+    }
     body{
       font-family:'VT323', monospace;
       color:var(--ink);
-      min-height:100vh;
+      min-height:100%;
       background: transparent;
+      background-image: url('./fondos/limonescruzados.png');
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      background-attachment: scroll;
       overflow-x:hidden;
-      overflow-y: visible;
+      overflow-y: clip;
+    }
+
+
+
+    body::-webkit-scrollbar {
+      display: none;
     }
 
     body::before {
@@ -941,33 +960,6 @@
       }
     }
 
-
-
-
-    html {
-      scroll-behavior: smooth;
-      min-height: 100%;
-      overflow-x: hidden;
-      overflow-y: auto;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-      background-color: #f5eddc;
-    }
-
-    body {
-      min-height: 100%;
-      overflow-x: hidden;
-      overflow-y: visible;
-    }
-
-    body {
-      background-image: url('./fondos/limonescruzados.png');
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: cover;
-      background-attachment: scroll;
-    }
-
     body::after {
       content: none;
     }
@@ -1060,10 +1052,10 @@
             <div class="pixel-corner corner-r"></div>
             <div class="terminal-tag">LOGRO DESBLOQUEADO</div>
             <h1 class="typewriter-title">Flor &amp; Keke</h1>
-            <h2>
+            <h3>
               Después de miles de códigos compartidos, viajes, risas y versiones de nosotros mismos,
               llegó el momento de ejecutar el evento más importante de nuestra historia.
-            </h2><br>
+            </h3><br>
 
             <div class="hero-data">
               <div class="hero-pill">
