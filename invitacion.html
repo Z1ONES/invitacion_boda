@@ -36,20 +36,9 @@
       color:var(--ink);
       min-height:100%;
       background: transparent;
-      background-image: url('./fondos/limonescruzados.png');
-      background-repeat: no-repeat;
-      background-position: center top;
-      background-size: cover;
-      background-attachment: scroll;
-      overflow-x:hidden;
-      overflow-y: clip;
+      overflow: hidden;
     }
-
-
-
-    body::-webkit-scrollbar {
-      display: none;
-    }
+    body::-webkit-scrollbar { display: none; }
 
     body::before {
       content: "";
@@ -64,6 +53,43 @@
       z-index: 0;
     }
 
+    .hidden { display: none !important; }
+
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(244, 211, 94, 0.06), transparent 45%),
+        var(--bg-dark);
+      background-size: 100% 3px, 3px 100%, auto, auto;
+      color: var(--amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 100;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    #boot-screen.fade-out { opacity: 0; visibility: hidden; }
+
+    .boot-shell {
+      width: min(920px, 100%);
+      min-height: 70vh;
+      border: 1px solid rgba(244, 211, 94, 0.25);
+      border-radius: 22px;
+      background: rgba(8, 7, 6, 0.72);
+      box-shadow: 0 0 0 1px rgba(244, 211, 94, 0.08), 0 0 60px rgba(244, 211, 94, 0.08);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(6px);
+      position: relative;
+      overflow: hidden;
+    }
+
     .boot-shell::before {
       content: "";
       position: absolute;
@@ -72,9 +98,58 @@
       animation: scan 4s linear infinite;
       background-position: center top;
       pointer-events: none;
-    
+    }
+
+    @keyframes scan {
+      from { transform: translateY(-100%); }
       to { transform: translateY(100%); }
     }
+
+    .boot-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(244, 211, 94, 0.18);
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .boot-status { opacity: 0.75; }
+    .boot-content {
+      flex: 1;
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(10px, 1.7vw, 14px);
+      line-height: 2;
+      white-space: pre-wrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.1em;
+      background: var(--amber);
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+      margin-left: 6px;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .boot-enter {
+      margin-top: 18px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--amber-soft);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: 0.4s ease;
+    }
+
+    .boot-enter.visible { opacity: 1; transform: translateY(0); }
 
     #invitation {
       position: relative;
@@ -689,6 +764,27 @@
     .footer-note { padding: 48px 0 76px; text-align: center; color: #000000; position: relative; font-size: 40px; }
     .footer-note::before { content: ""; display: block; width: 140px; height: 1px; background: linear-gradient(90deg, transparent, rgba(212,177,92,0.8), transparent); margin: 0 auto 18px; }
     .footer-note p:first-child { font-family: 'Silkscreen', monospace; font-size: clamp(24px, 4vw, 34px); color: #2f261f; margin-bottom: 10px; }
+    .rounded-badge {
+      display: inline-block;
+      max-width: min(92vw, 760px);
+      padding: 14px 24px;
+      border-radius: 18px;
+      background: rgba(255, 248, 235, 0.55);
+      border: 1px solid rgba(212, 177, 92, 0.20);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      color: #1f1f1f;
+      text-align: center;
+      line-height: 1.3;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .rounded-badge p { margin: 0; }
+    .rounded-badge p + p { margin-top: 8px; }
+    .rounded-badge .footer-sign {
+      font-family: 'Silkscreen', monospace;
+      font-size: clamp(18px, 3.4vw, 26px);
+      color: #111;
+    }
 
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -709,6 +805,9 @@
       .hero-subtitle { font-size: 24px; line-height: 1.35; }
       .btn { width: 100%; }
       .hero-actions { flex-direction: column; }
+      .boot-shell { min-height: 78vh; padding: 16px; }
+      .boot-topbar { font-size: 9px; line-height: 1.4; }
+      .boot-content { font-size: 10px; line-height: 1.8; }
       .boot-enter { font-size: 10px; line-height: 1.5; }
       .terminal-tag, .mini-label, .card-code { font-size: 10px; }
       .hero-ornament { opacity: 0.09; }
@@ -959,8 +1058,15 @@
         font-size: 16px;
       }
     }
+    body {
+      background-image: url('./fondos/limonescruzados.png');
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-size: cover;
+      background-attachment: scroll;
+    }
 
-    body::after {
+body::after {
       content: none;
     }
 
@@ -1052,10 +1158,11 @@
             <div class="pixel-corner corner-r"></div>
             <div class="terminal-tag">LOGRO DESBLOQUEADO</div>
             <h1 class="typewriter-title">Flor &amp; Keke</h1>
-            <h3>
+            <br>
+            <h2>
               Después de miles de códigos compartidos, viajes, risas y versiones de nosotros mismos,
               llegó el momento de ejecutar el evento más importante de nuestra historia.
-            </h3><br>
+            </h2><br>
 
             <div class="hero-data">
               <div class="hero-pill">
@@ -1086,7 +1193,7 @@
 
             <div class="quote-card">
               <span class="mini-label">MEMORY_FRAGMENT.txt</span>
-              <p>Gracias por ser parte de nuestra historia.</p>
+              <p>Te esperamos para compartir una noche inolvidable.</p>
             </div>
           </aside>
         </div>
@@ -1270,17 +1377,16 @@
             <div class="hero-actions" style="margin-top:20px;">
               <a class="btn btn-primary" href="https://script.google.com/macros/s/AKfycby8PPXq1TKuKLfyaDi5kdc99pOCSj4f8vh5XivTW4MIt1pUenkBJWFK3A0aS__RwjOp/exec">Confirma aca</a>
             </div>
-
           </article>
-          <article class="info-card glass-card">
-            <div class="card-top">
-              <p>Nos haría muy felices compartir este momento con vos.</p>
-              <str> Flor & Keke · 14.11.2026</str>
-            </div>
-          </article>
-          
         </div>
       </section>
+
+      <footer class="footer-note reveal">
+        <div class="rounded-badge">
+          <p>Gracias por ser parte de nuestra historia.</p>
+          <p class="footer-sign">Flor & Keke · 14.11.2026</p>
+        </div>
+      </footer>
     </div>
   </main>
 
@@ -1350,7 +1456,9 @@
       document.querySelectorAll('.reveal, .info-card').forEach(el => observer.observe(el));
     }
 
-      runReveals();
+    document.body.style.overflowY = 'auto';
+    document.body.style.overflowX = 'hidden';
+    runReveals();
   </script>
 </body>
 </html>
