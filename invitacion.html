@@ -328,10 +328,17 @@
     }
 
     .glass-card {
-      background: linear-gradient(180deg, var(--card-strong), rgba(255, 247, 233, 0.76));
+      background: linear-gradient(180deg, rgba(255, 251, 244, 0.94), rgba(255, 247, 233, 0.84));
       border: 1px solid rgba(212, 177, 92, 0.35);
       box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,0.42);
-      backdrop-filter: blur(12px);
+    }
+
+    @supports ((backdrop-filter: blur(6px)) or (-webkit-backdrop-filter: blur(6px))) {
+      .glass-card {
+        background: linear-gradient(180deg, var(--card-strong), rgba(255, 247, 233, 0.76));
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
     }
 
     .hero-main {
@@ -586,6 +593,12 @@
     .quote-card small { color: #776b61; font-size: 18px; line-height: 1.3; }
 
     .section { padding: 16px 0 30px; }
+    .section,
+    .countdown-section,
+    .footer-note {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 900px;
+    }
     .section-head {
       display: flex;
       flex-direction: column;
@@ -627,16 +640,32 @@
       position: relative;
       overflow: hidden;
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 18px), 0) scale(var(--reveal-scale, 1));
+      filter: blur(var(--reveal-blur, 0px));
+      transition:
+        opacity 0.62s cubic-bezier(0.2, 0.7, 0.2, 1),
+        transform 0.62s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.62s cubic-bezier(0.2, 0.7, 0.2, 1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+      transition-delay: var(--reveal-delay, 0ms);
       background: linear-gradient(180deg, rgba(255,251,244,0.90), rgba(255,245,232,0.76));
       box-shadow: 0 18px 34px rgba(64,54,32,0.08), inset 0 0 0 1px rgba(255,255,255,0.26);
+      will-change: transform, opacity, filter;
     }
 
     .info-card:hover { box-shadow: var(--shadow-soft); border-color: rgba(212,177,92,0.5); }
-    .info-card.visible { opacity: 1; transform: translateY(0); }
+    .info-card.visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0);
+      animation: revealBloom 1.15s ease both;
+    }
     .info-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, var(--amber), rgba(203,123,91,0.6), rgba(109,123,71,0.38)); opacity: 0.9; }
     .info-card::after { content: ""; position: absolute; inset: 12px; border-radius: 18px; border: 1px solid rgba(212,177,92,0.16); pointer-events: none; }
+    .cards-grid .info-card:nth-child(odd) { --reveal-x: -32px; --reveal-y: 26px; }
+    .cards-grid .info-card:nth-child(even) { --reveal-x: 32px; --reveal-y: 26px; }
+    .cards-grid .info-card:nth-child(3n) { --reveal-scale: 0.94; --reveal-blur: 6px; }
 
     .card-top {
       display: flex;
@@ -694,13 +723,156 @@
       color: #111;
     }
 
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal,
+    .countdown-section,
+    .footer-note {
+      opacity: 0;
+      transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 24px), 0) scale(var(--reveal-scale, 1));
+      filter: blur(var(--reveal-blur, 0px));
+      transition:
+        opacity 0.68s cubic-bezier(0.2, 0.7, 0.2, 1),
+        transform 0.68s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.68s cubic-bezier(0.2, 0.7, 0.2, 1);
+      transition-delay: var(--reveal-delay, 0ms);
+      will-change: transform, opacity, filter;
+    }
+
+    .reveal.visible,
+    .countdown-section.visible,
+    .footer-note.visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0);
+    }
+
+    .reveal-lift { --reveal-y: 34px; }
+    .reveal-left { --reveal-x: -42px; --reveal-y: 12px; }
+    .reveal-right { --reveal-x: 42px; --reveal-y: 12px; }
+    .reveal-zoom { --reveal-y: 20px; --reveal-scale: 0.94; --reveal-blur: 8px; }
+    .reveal-soft { --reveal-y: 18px; --reveal-scale: 0.985; }
+
+    .hero-main,
+    .hero-side,
+    .countdown-card,
+    .section-head,
+    .rounded-badge {
+      isolation: isolate;
+    }
+
+    .hero-main.visible,
+    .hero-side.visible,
+    .countdown-section.visible .countdown-card,
+    .section-head.visible,
+    .footer-note.visible .rounded-badge {
+      animation: revealBloom 1.15s ease both;
+    }
+
+    .hero-pill,
+    .status-row,
+    .quote-card p,
+    .quote-card small,
+    .count-box,
+    .section-head h2,
+    .section-head p,
+    .info-card .card-top,
+    .info-card p,
+    .info-card ul,
+    .info-card .hero-actions,
+    .rounded-badge p {
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity 0.42s ease,
+        transform 0.42s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .hero-main.visible .hero-pill,
+    .hero-side.visible .status-row,
+    .hero-side.visible .quote-card p,
+    .hero-side.visible .quote-card small,
+    .countdown-section.visible .count-box,
+    .section-head.visible h2,
+    .section-head.visible p,
+    .info-card.visible .card-top,
+    .info-card.visible p,
+    .info-card.visible ul,
+    .info-card.visible .hero-actions,
+    .footer-note.visible .rounded-badge p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-main.visible .hero-pill:nth-child(1),
+    .hero-side.visible .status-row:nth-child(1),
+    .countdown-section.visible .count-box:nth-child(1),
+    .section-head.visible h2,
+    .info-card.visible .card-top,
+    .footer-note.visible .rounded-badge p:nth-child(1) { transition-delay: 40ms; }
+
+    .hero-main.visible .hero-pill:nth-child(2),
+    .hero-side.visible .status-row:nth-child(2),
+    .countdown-section.visible .count-box:nth-child(2),
+    .section-head.visible p,
+    .info-card.visible p:first-of-type,
+    .info-card.visible ul,
+    .footer-note.visible .rounded-badge p:nth-child(2) { transition-delay: 90ms; }
+
+    .hero-side.visible .status-row:nth-child(3),
+    .countdown-section.visible .count-box:nth-child(3),
+    .info-card.visible p + p,
+    .info-card.visible .hero-actions { transition-delay: 140ms; }
+
+    .hero-side.visible .status-row:nth-child(4),
+    .countdown-section.visible .count-box:nth-child(4) { transition-delay: 190ms; }
+
+    @keyframes revealBloom {
+      0% {
+        box-shadow: 0 0 0 rgba(244,211,94,0), 0 18px 34px rgba(64,54,32,0.04);
+      }
+      45% {
+        box-shadow: 0 0 0 1px rgba(244,211,94,0.18), 0 0 42px rgba(244,211,94,0.10), 0 18px 34px rgba(64,54,32,0.08);
+      }
+      100% {
+        box-shadow: 0 18px 34px rgba(64,54,32,0.08);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal,
+      .countdown-section,
+      .footer-note,
+      .info-card,
+      .hero-pill,
+      .status-row,
+      .quote-card p,
+      .quote-card small,
+      .count-box,
+      .section-head h2,
+      .section-head p,
+      .info-card .card-top,
+      .info-card p,
+      .info-card ul,
+      .info-card .hero-actions,
+      .rounded-badge p {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+    }
 
     @media (max-width: 920px) {
       .hero-panel, .cards-grid { grid-template-columns: 1fr; }
       .hero { min-height: auto; padding-top: 18px; }
       .timeline-item { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 920px) {
+      .glass-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+      }
     }
 
     @media (max-width: 640px) {
@@ -1056,7 +1228,7 @@ body::after {
     <div class="wrap">
       <section class="hero">
         <div class="hero-panel">
-          <article class="hero-main glass-card reveal">
+          <article class="hero-main glass-card reveal reveal-lift">
             <div class="achievement-glow"></div>
             <div class="pixel-corner"></div>
             <div class="pixel-corner corner-r"></div>
@@ -1084,7 +1256,7 @@ body::after {
             </div>
           </article>
 
-          <aside class="hero-side glass-card reveal">
+          <aside class="hero-side glass-card reveal reveal-right">
             <div class="status-card">
               <span class="mini-label">SYSTEM_STATUS.log</span>
               <div class="status-grid">
@@ -1104,7 +1276,7 @@ body::after {
       </section>
 
 
-      <section class="countdown-section reveal">
+      <section class="countdown-section reveal reveal-zoom">
         <article class="countdown-card glass-card">
           <span class="mini-label">EVENT_COUNTDOWN.sys</span>
           <h2 class="countdown-title">FALTA PARA EL GRAN DÍA</h2>
@@ -1132,7 +1304,7 @@ body::after {
       </section>
 
       <section id="detalles" class="section">
-        <div class="section-head reveal">
+        <div class="section-head reveal reveal-soft">
           <div>
             <h2>🎮 Niveles del evento</h2>
           </div>
@@ -1284,7 +1456,7 @@ body::after {
         </div>
       </section>
 
-      <footer class="footer-note reveal">
+      <footer class="footer-note reveal reveal-zoom">
         <div class="rounded-badge">
           <p>Gracias por ser parte de nuestra historia.</p>
           <p class="footer-sign">Flor & Keke · 14.11.2026</p>
@@ -1347,16 +1519,33 @@ body::after {
     setInterval(updateCountdown, 1000);
 
     function runReveals() {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => entry.target.classList.add('visible'), i * 90);
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.18 });
+      const revealItems = Array.from(document.querySelectorAll('.reveal, .info-card'));
+      const firstViewport = window.innerHeight * 0.92;
 
-      document.querySelectorAll('.reveal, .info-card').forEach(el => observer.observe(el));
+      revealItems.forEach((el, index) => {
+        const inInitialViewport = el.getBoundingClientRect().top < firstViewport;
+        const delay = inInitialViewport ? Math.min(index * 24, 96) : 0;
+        el.style.setProperty('--reveal-delay', `${delay}ms`);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -6% 0px'
+      });
+
+      revealItems.forEach((el) => {
+        if (el.getBoundingClientRect().top < firstViewport) {
+          requestAnimationFrame(() => el.classList.add('visible'));
+          return;
+        }
+        observer.observe(el);
+      });
     }
 
     document.body.style.overflowY = 'auto';
