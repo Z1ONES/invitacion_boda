@@ -1537,6 +1537,40 @@
       }
     }
 
+    @media (max-width: 820px) {
+      .reveal,
+      .countdown-section,
+      .footer-note,
+      .info-card,
+      .hero-pill,
+      .status-row,
+      .quote-card p,
+      .quote-card small,
+      .count-box,
+      .section-head h2,
+      .section-head p,
+      .info-card .card-top,
+      .info-card p,
+      .info-card ul,
+      .info-card .hero-actions,
+      .rounded-badge p,
+      .card-icon.pixel-icon::before,
+      .card-icon.pixel-icon::after,
+      .hero-main::before,
+      .hero-main::after,
+      .hero-main .hero-spotlight,
+      .hero-main .hero-scan,
+      .hero-main .hero-scan::before,
+      .achievement-glow {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+        will-change: auto !important;
+      }
+    }
+
     @media (max-width: 640px) {
       .wrap { width: min(100% - 20px, 1180px); }
       .hero-main, .hero-side, .info-card, .full-card { padding: 18px; }
@@ -2349,6 +2383,13 @@ body::after {
 
     function runReveals() {
       const revealItems = Array.from(document.querySelectorAll('.reveal, .info-card'));
+      const disableRevealOnMobile = window.matchMedia('(max-width: 820px)').matches;
+
+      if (disableRevealOnMobile) {
+        revealItems.forEach((el) => el.classList.add('visible'));
+        return;
+      }
+
       const firstViewport = window.innerHeight * 0.92;
 
       revealItems.forEach((el, index) => {
