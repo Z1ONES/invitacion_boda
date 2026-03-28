@@ -2444,10 +2444,11 @@ body::after {
       const revealItems = Array.from(document.querySelectorAll('.reveal, .info-card'));
       const isMobileReveal = document.documentElement.classList.contains('mobile-reveal');
       const firstViewport = window.innerHeight * (isMobileReveal ? 1.04 : 0.92);
-      const stepDelay = isMobileReveal ? 18 : 24;
-      const maxDelay = isMobileReveal ? 72 : 96;
+      const stepDelay = isMobileReveal ? 90 : 24;
+      const maxDelay = isMobileReveal ? 420 : 96;
       const threshold = isMobileReveal ? 0.04 : 0.08;
       const rootMargin = isMobileReveal ? '0px 0px -2% 0px' : '0px 0px -6% 0px';
+      const initialHold = isMobileReveal ? 140 : 0;
 
       revealItems.forEach((el, index) => {
         const inInitialViewport = el.getBoundingClientRect().top < firstViewport;
@@ -2468,7 +2469,13 @@ body::after {
 
       revealItems.forEach((el) => {
         if (el.getBoundingClientRect().top < firstViewport) {
-          requestAnimationFrame(() => el.classList.add('visible'));
+          if (isMobileReveal) {
+            window.setTimeout(() => {
+              requestAnimationFrame(() => el.classList.add('visible'));
+            }, initialHold);
+          } else {
+            requestAnimationFrame(() => el.classList.add('visible'));
+          }
           return;
         }
         observer.observe(el);
