@@ -27,8 +27,6 @@
     (() => {
       if (window.matchMedia('(min-width: 821px)').matches) {
         document.documentElement.classList.add('desktop-reveal');
-      } else {
-        document.documentElement.classList.add('mobile-motion');
       }
     })();
   </script>
@@ -1533,32 +1531,6 @@
       50% { transform: translateY(-6px); }
     }
 
-    @keyframes mobileRiseIn {
-      0% {
-        opacity: 0;
-        transform: translate3d(0, 18px, 0) scale(0.985);
-        filter: blur(4px);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1);
-        filter: blur(0);
-      }
-    }
-
-    @keyframes mobileGlowIn {
-      0% {
-        opacity: 0.2;
-        transform: scale(0.96);
-        filter: blur(10px);
-      }
-      100% {
-        opacity: 0.82;
-        transform: scale(1.04);
-        filter: blur(10px);
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       .reveal,
       .countdown-section,
@@ -1590,34 +1562,6 @@
         transition: none !important;
         animation: none !important;
       }
-    }
-
-    .mobile-motion .hero-main,
-    .mobile-motion .hero-side,
-    .mobile-motion .countdown-section,
-    .mobile-motion .section-head,
-    .mobile-motion .info-card,
-    .mobile-motion .footer-note {
-      animation: mobileRiseIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-    }
-
-    .mobile-motion .hero-main { animation-delay: 0.04s; }
-    .mobile-motion .hero-side { animation-delay: 0.12s; }
-    .mobile-motion .countdown-section { animation-delay: 0.18s; }
-    .mobile-motion .section-head { animation-delay: 0.24s; }
-    .mobile-motion .cards-grid .info-card:nth-child(1) { animation-delay: 0.28s; }
-    .mobile-motion .cards-grid .info-card:nth-child(2) { animation-delay: 0.34s; }
-    .mobile-motion .cards-grid .info-card:nth-child(3) { animation-delay: 0.40s; }
-    .mobile-motion .cards-grid .info-card:nth-child(4) { animation-delay: 0.46s; }
-    .mobile-motion .cards-grid .info-card:nth-child(5) { animation-delay: 0.52s; }
-    .mobile-motion .cards-grid .info-card:nth-child(6) { animation-delay: 0.58s; }
-    .mobile-motion .cards-grid .info-card:nth-child(7) { animation-delay: 0.64s; }
-    .mobile-motion .cards-grid .info-card:nth-child(8) { animation-delay: 0.70s; }
-    .mobile-motion .cards-grid .info-card:nth-child(9) { animation-delay: 0.76s; }
-    .mobile-motion .footer-note { animation-delay: 0.82s; }
-
-    .mobile-motion .hero-main .achievement-glow {
-      animation: mobileGlowIn 0.9s ease-out 0.18s both;
     }
 
     @media (max-width: 920px) {
