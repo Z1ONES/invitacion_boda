@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flor &amp; Keke | 14.11.2026 | Test</title>
+    <title>Flor &amp; Keke | 14.11.2026</title>
   <meta name="description" content="Flor &amp; Keke · 14.11.2026 ·" />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Flor &amp; Keke | 14.11.2026 | Test" />
+  <meta property="og:title" content="Flor &amp; Keke | 14.11.2026" />
   <meta property="og:description" content="Flor &amp; Keke · 14.11.2026 ·" />
-  <meta property="og:url" content="https://boda-florykevin.vercel.app/invitacion-test.html" />
+  <meta property="og:url" content="https://boda-florykevin.vercel.app/invitacion.html" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image" content="https://boda-florykevin.vercel.app/iconos/social-preview.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Flor &amp; Keke | 14.11.2026 | Test" />
+  <meta name="twitter:title" content="Flor &amp; Keke | 14.11.2026" />
   <meta name="twitter:description" content="Flor &amp; Keke · 14.11.2026 ·" />
   <meta name="twitter:image" content="https://boda-florykevin.vercel.app/iconos/social-preview.png" />
   <link rel="icon" type="image/png" href="./iconos/favicon.png" />
-  <link rel="canonical" href="https://boda-florykevin.vercel.app/invitacion-test.html" />
+  <link rel="canonical" href="https://boda-florykevin.vercel.app/invitacion.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -396,43 +396,9 @@
       transform: scale(0.985);
       opacity: 0.76;
     }
-    .hero-main .panel-header {
-      position: absolute;
-      top: 18px;
-      left: 72px;
-      right: 18px;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-bottom: 0;
-      padding-top: 2px;
-      padding-left: 10px;
-      padding-right: 2px;
-      background: linear-gradient(180deg, rgba(20,17,13,0.96), rgba(20,17,13,0.84));
-      border-radius: 8px;
-      pointer-events: none;
-    }
-    .hero-main .panel-title {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 9px;
-      letter-spacing: 0.08em;
-      color: #d2bb77;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .hero-main .panel-meta {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 8px;
-      letter-spacing: 0.06em;
-      color: rgba(210,187,119,0.72);
-      text-transform: uppercase;
-      text-align: right;
-    }
     .hero-main .system-line {
       display: block;
-      margin: 0 auto 18px;
+      margin: 10px auto 18px;
       width: fit-content;
       max-width: 100%;
       padding: 8px 12px;
@@ -912,21 +878,6 @@
     .card-lemon.float-delay-1 { animation-delay: -1.2s; }
     .card-lemon.float-delay-2 { animation-delay: -2.4s; }
     .card-lemon.float-delay-3 { animation-delay: -3.1s; }
-    .info-card .window-label,
-    .countdown-card .window-label,
-    .status-card .window-label,
-    .quote-card .window-label {
-      position: absolute;
-      top: 14px;
-      right: 18px;
-      z-index: 2;
-      font-family: 'Press Start 2P', monospace;
-      font-size: 8px;
-      line-height: 1;
-      color: rgba(207,182,109,0.74);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
     .cards-grid .info-card:nth-child(odd) { --reveal-x: -32px; --reveal-y: 26px; }
     .cards-grid .info-card:nth-child(even) { --reveal-x: 32px; --reveal-y: 26px; }
     .cards-grid .info-card:nth-child(3n) { --reveal-scale: 0.94; --reveal-blur: 6px; }
@@ -1068,6 +1019,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      text-align: center;
       margin: 14px auto 18px;
       padding: 8px 14px;
       border-radius: 999px;
@@ -1991,10 +1944,6 @@ body::after {
         <div class="hero-panel">
           <article class="hero-main glass-card reveal reveal-lift">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <div class="panel-header" aria-hidden="true">
-              <span class="panel-title">main_window.exe</span>
-              <span class="panel-meta">player_01 + player_02</span>
-            </div>
             <div class="achievement-glow"></div>
             <div class="hero-scan" aria-hidden="true"></div>
             <div class="hero-spotlight" aria-hidden="true"></div>
@@ -2028,7 +1977,6 @@ body::after {
           <aside class="hero-side glass-card reveal reveal-right">
             <div class="status-card">
               <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-              <span class="window-label">window_01</span>
               <span class="mini-label">SYSTEM_STATUS.log</span>
               <div class="status-grid">
                 <div class="status-row"><strong>Compatibilidad</strong><span>100% estable</span></div>
@@ -2040,7 +1988,6 @@ body::after {
 
             <div class="quote-card">
               <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-              <span class="window-label">window_02</span>
               <span class="mini-label">MEMORY_FRAGMENT.txt</span>
               <p>Te esperamos para compartir una noche inolvidable.</p>
             </div>
@@ -2052,7 +1999,6 @@ body::after {
       <section class="countdown-section reveal reveal-zoom">
         <article class="countdown-card glass-card">
           <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-          <span class="window-label">counter.live</span>
           <span class="mini-label">EVENT_COUNTDOWN.sys</span>
           <h2 class="countdown-title">FALTA PARA EL GRAN DÍA</h2>
           <p class="countdown-copy">La próxima gran partida comienza en:</p>
@@ -2088,7 +2034,6 @@ body::after {
         <div class="cards-grid">
           <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_03</span>
             <div class="card-top">
               <div>
                 <span class="card-code">IGLESIA.data</span>
@@ -2108,7 +2053,6 @@ body::after {
 
           <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_04</span>
             <div class="card-top">
               <div>
                 <span class="card-code">FIESTON.location</span>
@@ -2128,7 +2072,6 @@ body::after {
 
           <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_05</span>
             <div class="card-top">
               <div>
                 <span class="card-code">VESTIMENTA.cfg</span>
@@ -2147,7 +2090,6 @@ body::after {
 
           <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_06</span>
             <div class="card-top">
               <div>
                 <span class="card-code">COMIDA.cfg</span>
@@ -2164,7 +2106,6 @@ body::after {
           </article>
            <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_07</span>
             <div class="card-top">
               <div>
                 <span class="card-code">USER_NOTES.md</span>
@@ -2181,7 +2122,6 @@ body::after {
 
           <article class="info-card glass-card photo-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_08</span>
             <div class="card-top">
               <div>
                 <span class="card-code">MEMORIES.gallery</span>
@@ -2216,7 +2156,6 @@ body::after {
 
           <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_09</span>
             <div class="card-top">
               <div>
                 <span class="card-code">GIFT.submit</span>
@@ -2261,7 +2200,6 @@ body::after {
 
           <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_10</span>
             <div class="card-top">
               <div>
                 <span class="card-code">PLAYLIST.optional</span>
@@ -2279,7 +2217,6 @@ body::after {
 
           <article class="info-card glass-card">
             <div class="window-controls" aria-hidden="true"><span class="dot-min"></span><span class="dot-max"></span><span class="dot-close"></span></div>
-            <span class="window-label">window_11</span>
             <div class="card-top">
               <div>
                 <span class="card-code">ASISTENCIA.submit</span>
@@ -2291,7 +2228,7 @@ body::after {
               Confirma si jugas con nosotros<br>
               Si no podes jugar esta partida, avisanos tambien.
             </p>
-            <div class="rsvp-deadline">Fecha limite de confirmacion: 24/10/2026</div>
+            <div class="rsvp-deadline">Fecha limite de confirmacion<br>24/10/2026</div>
              <h3>¿TE LO VAS A PERDER?</h3>
             <div class="hero-actions" style="margin-top:20px;">
               <a class="btn btn-primary" href="https://script.google.com/macros/s/AKfycbwmYeVNc8VfZ0ypBGN7XNwvdg-puA5I4mvUHlTL8-iZiVmlpuoIgBVWM0BMQ22h3ewK/exec">Confirma aca</a>
