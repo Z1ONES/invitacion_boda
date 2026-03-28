@@ -23,6 +23,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=VT323&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (() => {
+      if (window.matchMedia('(min-width: 821px)').matches) {
+        document.documentElement.classList.add('desktop-reveal');
+      }
+    })();
+  </script>
   <style>
     :root {
       --bg-dark: #171411;
@@ -765,6 +772,23 @@
       display: flex;
       flex-direction: column;
       width: 100%;
+      opacity: 1;
+      transform: none;
+      filter: none;
+      transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background-position 0.3s ease;
+      background:
+        linear-gradient(180deg, rgba(28,23,18,0.96), rgba(13,11,8,0.94)),
+        repeating-linear-gradient(180deg, rgba(244,211,94,0.03) 0 2px, transparent 2px 12px);
+      background-size: 100% 100%, 100% 16px;
+      box-shadow: var(--hud-shadow), inset 0 0 0 1px rgba(255,255,255,0.05);
+      border: 2px solid rgba(244,211,94,0.12);
+      will-change: transform, opacity, filter;
+      min-height: 100%;
+    }
+    .desktop-reveal .info-card {
       opacity: 0;
       transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 18px), 0) scale(var(--reveal-scale, 1));
       filter: blur(var(--reveal-blur, 0px));
@@ -776,14 +800,6 @@
         border-color 0.3s ease,
         background-position 0.3s ease;
       transition-delay: var(--reveal-delay, 0ms);
-      background:
-        linear-gradient(180deg, rgba(28,23,18,0.96), rgba(13,11,8,0.94)),
-        repeating-linear-gradient(180deg, rgba(244,211,94,0.03) 0 2px, transparent 2px 12px);
-      background-size: 100% 100%, 100% 16px;
-      box-shadow: var(--hud-shadow), inset 0 0 0 1px rgba(255,255,255,0.05);
-      border: 2px solid rgba(244,211,94,0.12);
-      will-change: transform, opacity, filter;
-      min-height: 100%;
     }
 
     .info-card:hover {
@@ -1276,6 +1292,14 @@
     .reveal,
     .countdown-section,
     .footer-note {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+
+    .desktop-reveal .reveal,
+    .desktop-reveal .countdown-section,
+    .desktop-reveal .footer-note {
       opacity: 0;
       transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 24px), 0) scale(var(--reveal-scale, 1));
       filter: blur(var(--reveal-blur, 0px));
@@ -1361,6 +1385,22 @@
     .info-card ul,
     .info-card .hero-actions,
     .rounded-badge p {
+      opacity: 1;
+      transform: none;
+    }
+
+    .desktop-reveal .hero-pill,
+    .desktop-reveal .status-row,
+    .desktop-reveal .quote-card p,
+    .desktop-reveal .quote-card small,
+    .desktop-reveal .count-box,
+    .desktop-reveal .section-head h2,
+    .desktop-reveal .section-head p,
+    .desktop-reveal .info-card .card-top,
+    .desktop-reveal .info-card p,
+    .desktop-reveal .info-card ul,
+    .desktop-reveal .info-card .hero-actions,
+    .desktop-reveal .rounded-badge p {
       opacity: 0;
       transform: translateY(12px);
       transition:
