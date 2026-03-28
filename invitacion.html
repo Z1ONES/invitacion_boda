@@ -862,6 +862,60 @@
       letter-spacing: 0.04em;
       text-align: center;
     }
+    .gift-panel {
+      margin-top: 18px;
+      padding: 18px 16px;
+      border: 2px solid rgba(111,84,33,0.24);
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(62,48,29,0.34), rgba(21,17,13,0.18)),
+        repeating-linear-gradient(0deg, rgba(244,211,94,0.05) 0 2px, transparent 2px 10px);
+      box-shadow:
+        inset 0 0 0 1px rgba(255,239,197,0.06),
+        0 12px 28px rgba(0,0,0,0.14);
+    }
+    .gift-panel-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,216,160,0.24);
+      background: rgba(244,211,94,0.08);
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      line-height: 1.6;
+      color: #f1deaa;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .gift-panel-copy {
+      margin-bottom: 16px;
+    }
+    .gift-account-grid {
+      display: grid;
+      gap: 12px;
+    }
+    .gift-account {
+      padding: 14px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,216,160,0.16);
+      background: linear-gradient(180deg, rgba(255,248,228,0.06), rgba(255,248,228,0.02));
+    }
+    .gift-account strong {
+      color: #f4e4b2;
+    }
+    .gift-account-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 9px;
+      line-height: 1.6;
+      color: #cfb66d;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
     .info-card .hero-actions {
       margin-top: auto;
       padding-top: 18px;
@@ -1846,11 +1900,13 @@ body::after {
                 <span>Slot 02</span>
                 <i class="slot-spark">+</i>
               </div>
-              <div class="photo-slot">
+              <div class="photo-slot has-photo">
+                <img src="fotos/nosotros-3.jpg" alt="Foto de Flor y Keke 3" loading="lazy">
                 <span>Slot 03</span>
                 <i class="slot-spark">+</i>
               </div>
-              <div class="photo-slot">
+              <div class="photo-slot has-photo">
+                <img src="fotos/nosotros-4.jpg" alt="Foto de Flor y Keke 4" loading="lazy">
                 <span>Slot 04</span>
                 <i class="slot-spark">+</i>
               </div>
@@ -1873,19 +1929,29 @@ body::after {
             </div>
             <p>
               Con tu presencia ya ganamos la partida, si ademas quere darnos un powerup habilitamos una cuenta para que empecemos el siguiente juego cheateados:<br>
-              <br>
             </p>
-            <p>
-              <strong>Banco ICBC</strong><br>
-              <br>
-              <strong>Cuenta $$$:</strong><br>
-              <strong>Alias:</strong> Kevin.Rodas<br>
-              <strong>CBU:</strong> 0150528301000114638208<br>
-              <br>
-              <strong>Cuenta U$D:</strong><br>
-              <strong>Alias:</strong> Kevin.Rodas.Usd<br>
-              <strong>CBU:</strong> 0150528311000107470885
-            </p>
+            <div class="gift-panel">
+              <div class="gift-panel-title">Power-up desbloqueado</div>
+              <p class="gift-panel-copy">
+                Banco ICBC listo para recibir mimos para esta nueva aventura.
+              </p>
+              <div class="gift-account-grid">
+                <div class="gift-account">
+                  <span class="gift-account-label">Cuenta $$$</span>
+                  <p>
+                    <strong>Alias:</strong> Kevin.Rodas<br>
+                    <strong>CBU:</strong> 0150528301000114638208
+                  </p>
+                </div>
+                <div class="gift-account">
+                  <span class="gift-account-label">Cuenta U$D</span>
+                  <p>
+                    <strong>Alias:</strong> Kevin.Rodas.Usd<br>
+                    <strong>CBU:</strong> 0150528311000107470885
+                  </p>
+                </div>
+              </div>
+            </div>
           </article>
 
           <article class="info-card glass-card">
