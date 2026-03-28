@@ -1260,7 +1260,9 @@
       .info-card p,
       .info-card ul,
       .info-card .hero-actions,
-      .rounded-badge p {
+      .rounded-badge p,
+      .card-icon.pixel-icon::before,
+      .card-icon.pixel-icon::after {
         opacity: 1 !important;
         transform: none !important;
         filter: none !important;
@@ -1368,6 +1370,8 @@
       background-size: contain;
       image-rendering: pixelated;
       filter: drop-shadow(1px 1px 0 rgba(0,0,0,0.24));
+      animation: spriteFloat 3.6s ease-in-out infinite;
+      transform-origin: center bottom;
     }
     .card-icon.pixel-icon::after {
       content: "";
@@ -1421,6 +1425,14 @@
     .card-icon.pixel-icon.music::before { background-image: url("./iconos/musica.png"); }
     .card-icon.pixel-icon.gift::before { background-image: url("./iconos/regalo.png"); }
     .card-icon.pixel-icon.confirm::before { background-image: url("./iconos/confirmacion.png"); }
+    .card-icon.pixel-icon.party::before { animation-delay: -0.4s; }
+    .card-icon.pixel-icon.dress::before { animation-delay: -0.8s; }
+    .card-icon.pixel-icon.settings::before { animation-delay: -1.2s; }
+    .card-icon.pixel-icon.details::before { animation-delay: -1.6s; }
+    .card-icon.pixel-icon.photos::before { animation-delay: -0.6s; }
+    .card-icon.pixel-icon.gift::before { animation-delay: -2s; }
+    .card-icon.pixel-icon.music::before { animation-delay: -2.4s; }
+    .card-icon.pixel-icon.confirm::before { animation-delay: -2.8s; }
     .card-icon.pixel-icon.photos {
       background: linear-gradient(180deg, rgba(77,64,45,0.98), rgba(35,28,20,0.95));
       border-color: rgba(255,216,160,0.30);
@@ -1438,7 +1450,6 @@
       box-shadow:
         6px 6px 0 rgba(111,84,33,0.32),
         inset 0 0 0 2px rgba(111,84,33,0.22);
-      animation: spriteFloat 3.6s ease-in-out infinite;
     }
     .card-icon.pixel-icon.photos::after {
       content: "";
