@@ -33,6 +33,6 @@ function stopTyping(){try{typing.pause();typing.currentTime=0;}catch(e){}}
 function go(){stopTyping();const t=document.querySelector('.transition');t.classList.add('active');setTimeout(()=>{window.location.href='invitacion.html';},1550);}
 window.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){go();}});
 
-const lines=['INICIANDO LOVE_ARCADE_OS...','[OK] sistema de boda cargado','[OK] jugador 1 detectado: KEKE','[OK] jugador 2 detectado: FLOR','[OK] modo co-op: ACTIVADO','[OK] partida guardada: 14.11.2026','','EJECUTANDO boda.exe','████████████████████ 100%','','NUEVA PARTIDA DESBLOQUEADA ♥'];
+const lines=['INICIANDO LOVE_ARCADE_OS...','[OK] sistema de boda cargado','[OK] jugador 1 detectado: FLOR','[OK] jugador 2 detectado: KEKE','[OK] modo co-op: ACTIVADO','[OK] partida guardada: 14.11.2026','','EJECUTANDO boda.exe','████████████████████ 100%','','NUEVA PARTIDA DESBLOQUEADA ♥'];
 const term=document.getElementById('term'),enter=document.getElementById('enter');let i=0,j=0;function type(){playTyping();if(i>=lines.length){stopTyping();enter.classList.add('visible');document.querySelector('.btn').classList.add('ready');return;}const line=lines[i];if(j<=line.length){term.textContent+=line.charAt(j)||'';j++;setTimeout(type,line.charAt(j-1)==='█'?22:34);}else{term.textContent+='\n';i++;j=0;setTimeout(type,180);}}setTimeout(type,500);
 </script></body></html>
