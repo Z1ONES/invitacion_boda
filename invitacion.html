@@ -155,6 +155,7 @@
 <body class="splash-active">
   <span class="float f1">♥</span><span class="float f2">★</span><span class="float f3">◆</span>
   <audio id="bgMusic" src="./musica/brave-heart-instrumental.mp4" loop preload="auto" autoplay playsinline></audio>
+  <audio id="startSfx" src="./musica/success.wav" preload="auto"></audio>
   <!-- HTML: pantalla de bienvenida para habilitar audio con una interacción real del usuario. -->
   <div class="splash-screen" id="splashScreen" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
     <div class="splash-card">
@@ -191,14 +192,23 @@
 
     // JavaScript: splash + audio controller. Browsers allow sound reliably only after a user gesture.
     const music = document.getElementById('bgMusic');
+    const startSfx = document.getElementById('startSfx');
     const musicToggle = document.getElementById('musicToggle');
     const splashScreen = document.getElementById('splashScreen');
     const startExperience = document.getElementById('startExperience');
-    let musicOn = false;
+    let musicOn = false, startInProgress = false;
+    function wait(ms){ return new Promise(resolve => window.setTimeout(resolve, ms)); }
     function updateMusicButton(){
       musicToggle.textContent = musicOn ? '🔊' : '🔇';
       musicToggle.classList.toggle('is-playing', musicOn);
       musicToggle.setAttribute('aria-label', musicOn ? 'Música activada' : 'Música desactivada');
+    }
+    function playStartSfx(){
+      try {
+        startSfx.volume = .22;
+        startSfx.currentTime = 0;
+        startSfx.play().catch(() => {});
+      } catch(e) {}
     }
     async function playMusic({ restart = false } = {}){
       try {
@@ -223,6 +233,11 @@
       window.setTimeout(() => splashScreen.setAttribute('aria-hidden', 'true'), 600);
     }
     async function startInvitation(){
+      if (startInProgress) return;
+      startInProgress = true;
+      startExperience.disabled = true;
+      playStartSfx();
+      await wait(300);
       await playMusic({ restart: true });
       revealInvitation();
     }
