@@ -65,14 +65,14 @@
     .rsvp{margin-top:34px;padding:clamp(24px,4vw,34px);display:grid;grid-template-columns:.72fr 1.4fr .78fr;gap:24px;align-items:center;border-color:rgba(255,59,213,.68);box-shadow:0 0 24px rgba(255,59,213,.35),0 0 64px rgba(157,77,255,.22)}.control{text-align:center;color:var(--purple);filter:drop-shadow(0 0 18px rgba(157,77,255,.65));animation:float 3s ease-in-out infinite}.control{font-size:clamp(64px,9vw,108px)}.control span{display:block;font-size:32px;color:var(--pink)}.rsvp-main{text-align:center}.rsvp h2{font-size:clamp(27px,4vw,45px);margin-bottom:8px}.rsvp p{color:var(--muted);font-size:22px}.deadline{margin:10px 0 16px;color:var(--yellow);font-size:26px}.player-status{padding:16px;border:1px solid rgba(255,79,123,.55);background:rgba(255,79,123,.06);text-align:center}.player-status span{display:block;color:var(--muted);font-size:17px}.player-status strong{display:block;color:var(--yellow);font-size:27px;margin:8px 0}.empty{height:14px;border:1px solid var(--pink);box-shadow:inset 0 0 10px rgba(255,59,213,.18);margin-top:10px}.footer{margin-top:28px;padding:20px 14px;text-align:center;color:var(--muted);border-top:1px solid rgba(157,77,255,.28);border-bottom:1px solid rgba(24,215,255,.28);background:rgba(7,5,20,.45);margin-bottom:34px}.footer strong{display:block;margin-top:8px;color:var(--pink);font-family:'Silkscreen';letter-spacing:.08em}
     .music{position:fixed;right:16px;bottom:16px;z-index:30;width:54px;height:54px;border:2px solid var(--cyan);background:rgba(7,5,20,.88);color:var(--cyan);display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow-cyan);font-size:24px}.music.is-playing{border-color:var(--green);color:var(--green)}.toast{position:fixed;left:50%;bottom:22px;z-index:40;transform:translateX(-50%) translateY(140%);padding:12px 18px;color:var(--green);border:1px solid rgba(72,255,139,.6);background:rgba(7,5,20,.92);transition:.25s}.toast.show{transform:translateX(-50%) translateY(0)}
 
-    /* Splash screen: blocks scroll until the soundtrack is started by a user gesture. */
-    body.splash-active{overflow:hidden;height:100vh;height:100svh}
+    /* Splash screen: cinematic intro, then the hero START button begins the soundtrack. */
+    body.splash-active,body.start-pending{overflow:hidden;height:100vh;height:100svh}
     .splash-screen{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 15% 8%,rgba(255,59,213,.24),transparent 30%),radial-gradient(circle at 85% 18%,rgba(24,215,255,.18),transparent 34%),linear-gradient(180deg,#05040d 0%,#0a0618 52%,#05040d 100%);transition:opacity .6s ease,visibility .6s ease}
     .splash-screen:before,.splash-screen:after{content:"";position:absolute;inset:0;pointer-events:none}.splash-screen:before{background:linear-gradient(rgba(24,215,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,59,213,.04) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,.18))}.splash-screen:after{background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 5px);mix-blend-mode:screen;opacity:.4}
     .splash-screen.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
     .splash-card{position:relative;z-index:1;width:min(620px,100%);padding:clamp(28px,6vw,48px);text-align:center;border:2px solid rgba(255,59,213,.68);background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 0 24px rgba(255,59,213,.35),0 0 64px rgba(157,77,255,.22);clip-path:polygon(0 var(--cut),var(--cut) 0,calc(100% - var(--cut)) 0,100% var(--cut),100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
-    .splash-eyebrow{margin-bottom:16px;color:var(--cyan);font-family:'Silkscreen';font-size:clamp(17px,2.5vw,22px);letter-spacing:.08em;text-transform:uppercase}.splash-title{margin-bottom:16px;color:var(--pink);font-family:'Press Start 2P';font-size:clamp(30px,6vw,50px);line-height:1.15;text-shadow:4px 4px 0 rgba(24,215,255,.35),0 0 28px rgba(255,59,213,.72)}.splash-text{margin-bottom:24px;color:var(--muted);font-size:clamp(24px,3vw,30px)}
-    .splash-start{width:min(100%,360px);min-height:64px;margin:auto;color:#041007;background:linear-gradient(90deg,var(--green),#9cff61);border-color:rgba(184,255,201,.9);box-shadow:0 0 22px rgba(72,255,139,.48);font-size:clamp(20px,3vw,26px)}
+    .splash-eyebrow{margin-bottom:16px;color:var(--cyan);font-family:'Silkscreen';font-size:clamp(17px,2.5vw,22px);letter-spacing:.08em;text-transform:uppercase}.splash-title{margin-bottom:16px;color:var(--pink);font-family:'Press Start 2P';font-size:clamp(30px,6vw,50px);line-height:1.15;text-shadow:4px 4px 0 rgba(24,215,255,.35),0 0 28px rgba(255,59,213,.72)}.splash-text{color:var(--muted);font-size:clamp(24px,3vw,30px)}
+    .hero-start.is-hidden{opacity:0;transform:translateY(-8px);pointer-events:none}
     @keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.08)}}@keyframes eq{0%,100%{height:10px}50%{height:42px}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
     body{background-position:center,center,center,center}
@@ -152,24 +152,22 @@
     @media(max-height:680px) and (max-width:640px){.player-card{min-height:350px}.player-sprite{min-height:220px}.player-sprite img{height:240px}.hero-copy{padding-top:18px;padding-bottom:18px}}
   </style>
 </head>
-<body class="splash-active">
+<body class="splash-active start-pending">
   <span class="float f1">♥</span><span class="float f2">★</span><span class="float f3">◆</span>
-  <audio id="bgMusic" src="./musica/brave-heart-instrumental.mp4" loop preload="auto" autoplay playsinline></audio>
-  <audio id="startSfx" src="./musica/success.wav" preload="auto"></audio>
-  <!-- HTML: pantalla de bienvenida para habilitar audio con una interacción real del usuario. -->
+  <audio id="bgMusic" src="./musica/brave-heart-instrumental.mp4" loop preload="auto" playsinline></audio>
+  <!-- HTML: intro visual automática. La música empieza recién en el START de la portada. -->
   <div class="splash-screen" id="splashScreen" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
     <div class="splash-card">
       <p class="splash-eyebrow">Nueva partida desbloqueada</p>
       <h1 class="splash-title" id="splashTitle">Flor &amp; Keke</h1>
       <p class="splash-text">Nuestra aventura comienza aquí</p>
-      <button class="btn splash-start" type="button" id="startExperience">▶ PRESS START</button>
     </div>
   </div>
   <div class="arcade-particles" aria-hidden="true"></div>
   <header class="hud screen"><div><span class="hearts">♥♥♥</span><span>1UP</span><span class="hud-name">FLOR &amp; KEKE</span></div><div>CO-OP MODE: ON</div><div><span>LVL ∞</span><span>XP 14112026</span><span class="xpbar"><span></span></span></div></header><div class="page-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
   <main class="page">
     <section class="hero" id="start">
-      <div class="panel hero-copy"><p class="eyebrow screen">Nueva partida desbloqueada ▶▶</p><h1 class="title pixel" data-text="Flor & Keke">Flor <span>&amp; Keke</span></h1><div class="date pixel">14.11.2026</div><h2 class="claim screen">Jugador 1 &amp; Jugador 2 <strong>se casan</strong></h2><p class="hero-text">Aceptamos esta misión: empezar juntos la partida más importante de nuestras vidas. <b>¿Listos para el co-op definitivo?</b></p><div class="btnrow"><a class="btn primary" href="#rsvp">▶ PRESS START</a><a class="btn secondary" href="#mission">Ver misión</a></div><div class="loading screen"><span>Cargando aventura...</span><span class="track"></span><span>100%</span></div></div>
+      <div class="panel hero-copy"><p class="eyebrow screen">Nueva partida desbloqueada ▶▶</p><h1 class="title pixel" data-text="Flor & Keke">Flor <span>&amp; Keke</span></h1><div class="date pixel">14.11.2026</div><h2 class="claim screen">Jugador 1 &amp; Jugador 2 <strong>se casan</strong></h2><p class="hero-text">Aceptamos esta misión: empezar juntos la partida más importante de nuestras vidas. <b>¿Listos para el co-op definitivo?</b></p><div class="btnrow"><a class="btn primary hero-start" id="heroStart" href="#start">▶ PRESS START</a><a class="btn secondary" href="#mission">Ver misión</a></div><div class="loading screen"><span>Cargando aventura...</span><span class="track"></span><span>100%</span></div></div>
       <div class="panel players"><div class="status screen"><span>● CO-OP MODE: ON</span><span>♥ LINK OK</span></div><div class="photos"><article class="player-card flor"><div class="player-label">JUGADOR 1</div><div class="player-sprite"><img src="./fotos/player-flor.png" alt="Flor pixel art vestida de novia"></div><div class="player-nameplate"><strong>FLOR</strong><span>NOVIA</span></div></article><article class="player-card keke"><div class="player-label">JUGADOR 2</div><div class="player-sprite"><img src="./fotos/player-keke.png" alt="Keke pixel art vestido de novio"></div><div class="player-nameplate"><strong>KEKE</strong><span>NOVIO</span></div></article></div><div class="couple-stats" aria-label="Stats de la pareja"><div class="stat-line"><strong>AMOR</strong><div class="stat-bar"><span style="--value:100%"></span></div><span>100%</span></div><div class="stat-line"><strong>TEAMWORK</strong><div class="stat-bar"><span style="--value:99%"></span></div><span>99%</span></div><div class="stat-line"><strong>FIESTA</strong><div class="stat-bar"><span style="--value:100%"></span></div><span>READY</span></div><div class="stat-line"><strong>CO-OP</strong><div class="stat-bar"><span style="--value:100%"></span></div><span>ON</span></div></div><div class="coop-brief"><strong>MISIÓN PRINCIPAL: LLEGAR AL ALTAR</strong><span>Party sync estable · campaña lista para iniciar</span><div class="coop-chips"><i>ANILLOS READY</i><i>RAMO EQUIPPED</i><i>TRAJE LOCKED</i><i>14.11.2026 SAVE</i></div></div></div>
     </section>
     <section class="mission-row" id="mission"><article class="mission-card"><div class="ico" aria-hidden="true">⛪</div><div><h2>Ceremonia</h2><p>Parroquia Jesús del Gran Poder</p><small>Inicio: 19:30 hs · De la Retranca 1098, Parque Leloir</small><div class="mission-actions"><a class="btn secondary" href="https://maps.app.goo.gl/THuS3n4kagmkAD5n8" target="_blank" rel="noopener">Cómo llegar</a></div></div></article><article class="mission-card"><div class="ico" aria-hidden="true">🪩</div><div><h2>Fiesta</h2><p>Quinta Udaondo</p><small>Después de la ceremonia / 21:00 HS · Gdor. Guillermo Udaondo 3644, Villa Udaondo</small><div class="mission-actions"><a class="btn secondary" href="https://maps.app.goo.gl/QYYEaSuWtHMfW1Uc8" target="_blank" rel="noopener">Cómo llegar</a></div></div></article></section>
@@ -190,25 +188,18 @@
     const toast = document.getElementById('toast'); let tt;
     function show(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 1800); }
 
-    // JavaScript: splash + audio controller. Browsers allow sound reliably only after a user gesture.
+    // JavaScript: automatic splash intro plus user-triggered audio start.
     const music = document.getElementById('bgMusic');
-    const startSfx = document.getElementById('startSfx');
     const musicToggle = document.getElementById('musicToggle');
     const splashScreen = document.getElementById('splashScreen');
-    const startExperience = document.getElementById('startExperience');
-    let musicOn = false, startInProgress = false;
+    const heroStart = document.getElementById('heroStart');
+    let musicOn = false, experienceStarted = false;
+    try { experienceStarted = sessionStorage.getItem('weddingExperienceStarted') === '1'; } catch(e) {}
     function wait(ms){ return new Promise(resolve => window.setTimeout(resolve, ms)); }
     function updateMusicButton(){
       musicToggle.textContent = musicOn ? '🔊' : '🔇';
       musicToggle.classList.toggle('is-playing', musicOn);
       musicToggle.setAttribute('aria-label', musicOn ? 'Música activada' : 'Música desactivada');
-    }
-    function playStartSfx(){
-      try {
-        startSfx.volume = .22;
-        startSfx.currentTime = 0;
-        startSfx.play().catch(() => {});
-      } catch(e) {}
     }
     async function playMusic({ restart = false } = {}){
       try {
@@ -227,25 +218,34 @@
       musicOn = false;
       updateMusicButton();
     }
-    function revealInvitation(){
+    function revealSplash(){
       splashScreen.classList.add('is-hidden');
       document.body.classList.remove('splash-active');
       window.setTimeout(() => splashScreen.setAttribute('aria-hidden', 'true'), 600);
     }
-    async function startInvitation(){
-      if (startInProgress) return;
-      startInProgress = true;
-      startExperience.disabled = true;
-      playStartSfx();
-      await wait(300);
-      await playMusic({ restart: true });
-      revealInvitation();
+    function unlockInvitation(){
+      document.body.classList.remove('start-pending');
+      heroStart.classList.add('is-hidden');
+      heroStart.setAttribute('aria-hidden', 'true');
+      heroStart.setAttribute('tabindex', '-1');
+      try { sessionStorage.setItem('weddingExperienceStarted', '1'); } catch(e) {}
     }
-    startExperience.addEventListener('click', startInvitation);
+    async function startInvitation(event){
+      event.preventDefault();
+      if (experienceStarted) return;
+      experienceStarted = true;
+      await playMusic({ restart: true });
+      unlockInvitation();
+    }
+    document.addEventListener('click', event => {
+      if (!document.body.classList.contains('start-pending')) return;
+      const link = event.target.closest('a');
+      if (link && link !== heroStart) event.preventDefault();
+    });
+    heroStart.addEventListener('click', startInvitation);
     musicToggle.addEventListener('click', async () => { if (musicOn) { pauseMusic(); } else { await playMusic(); } });
-    window.addEventListener('load', async () => {
-      if (await playMusic({ restart: true })) revealInvitation();
-    }, { once: true });
+    window.addEventListener('load', async () => { await wait(1800); revealSplash(); }, { once: true });
+    if (experienceStarted) unlockInvitation();
     updateMusicButton();
     document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(btn.dataset.copy); show('Dato copiado al portapapeles'); } catch(e) { show('No se pudo copiar automáticamente'); } }));
 
