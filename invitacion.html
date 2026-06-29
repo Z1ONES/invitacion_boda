@@ -64,6 +64,15 @@
     .extras{display:grid;grid-template-columns:.85fr .95fr 1.2fr;gap:18px;margin-top:22px;align-items:start}.extras-stack{display:grid;gap:18px}.mini,.gallery{padding:20px}.soundtrack{display:flex;flex-direction:column;min-height:0}.soundtrack .btn{align-self:flex-start;min-height:46px;padding:11px 18px}.soundtrack .eq{width:min(100%,240px);height:34px;margin-top:18px}.photo-tag{padding:20px;border:1px solid rgba(24,215,255,.42);background:rgba(24,215,255,.07);box-shadow:0 0 14px rgba(24,215,255,.14)}.photo-tag span{display:block;color:var(--muted);font-size:19px;margin-bottom:8px}.photo-tag strong{display:block;color:var(--cyan);font-family:'Silkscreen';font-size:23px;letter-spacing:.04em;text-shadow:0 0 12px rgba(24,215,255,.38)}.mini h3,.gallery h3{color:var(--purple);font-size:24px;margin-bottom:8px;display:flex;align-items:center;gap:10px}.mini-icon{width:30px;height:30px}.mini p,.gallery p{color:var(--muted);font-size:20px;margin-bottom:14px}.eq{display:flex;gap:4px;height:42px;align-items:end;margin-top:14px}.eq span{width:8px;min-height:8px;background:linear-gradient(180deg,var(--pink),var(--purple));box-shadow:0 0 8px rgba(255,59,213,.45);animation:eq 1.3s infinite ease-in-out}.eq span:nth-child(2n){animation-delay:-.25s}.eq span:nth-child(3n){animation-delay:-.55s}.account{padding:10px 12px;border:1px solid rgba(255,227,91,.36);background:rgba(255,227,91,.06);font-size:18px;margin:10px 0}.copy{color:var(--yellow);background:transparent;border:1px solid rgba(255,227,91,.55);padding:8px 10px;font-family:'Silkscreen';cursor:pointer;width:100%;margin-bottom:6px}.strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.strip img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid rgba(24,215,255,.48);background:rgba(255,255,255,.06);box-shadow:0 0 14px rgba(24,215,255,.16)}.strip img:nth-child(2){object-position:50% 20%}.dots{display:flex;justify-content:center;gap:8px;margin-top:12px}.dots span{width:8px;height:8px;border-radius:50%;background:var(--purple);box-shadow:0 0 10px rgba(157,77,255,.7)}.dots span:first-child{background:var(--cyan)}
     .rsvp{margin-top:34px;padding:clamp(24px,4vw,34px);display:grid;grid-template-columns:.72fr 1.4fr .78fr;gap:24px;align-items:center;border-color:rgba(255,59,213,.68);box-shadow:0 0 24px rgba(255,59,213,.35),0 0 64px rgba(157,77,255,.22)}.control{text-align:center;color:var(--purple);filter:drop-shadow(0 0 18px rgba(157,77,255,.65));animation:float 3s ease-in-out infinite}.control{font-size:clamp(64px,9vw,108px)}.control span{display:block;font-size:32px;color:var(--pink)}.rsvp-main{text-align:center}.rsvp h2{font-size:clamp(27px,4vw,45px);margin-bottom:8px}.rsvp p{color:var(--muted);font-size:22px}.deadline{margin:10px 0 16px;color:var(--yellow);font-size:26px}.player-status{padding:16px;border:1px solid rgba(255,79,123,.55);background:rgba(255,79,123,.06);text-align:center}.player-status span{display:block;color:var(--muted);font-size:17px}.player-status strong{display:block;color:var(--yellow);font-size:27px;margin:8px 0}.empty{height:14px;border:1px solid var(--pink);box-shadow:inset 0 0 10px rgba(255,59,213,.18);margin-top:10px}.footer{margin-top:28px;padding:20px 14px;text-align:center;color:var(--muted);border-top:1px solid rgba(157,77,255,.28);border-bottom:1px solid rgba(24,215,255,.28);background:rgba(7,5,20,.45);margin-bottom:34px}.footer strong{display:block;margin-top:8px;color:var(--pink);font-family:'Silkscreen';letter-spacing:.08em}
     .music{position:fixed;right:16px;bottom:16px;z-index:30;width:54px;height:54px;border:2px solid var(--cyan);background:rgba(7,5,20,.88);color:var(--cyan);display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow-cyan);font-size:24px}.music.is-playing{border-color:var(--green);color:var(--green)}.toast{position:fixed;left:50%;bottom:22px;z-index:40;transform:translateX(-50%) translateY(140%);padding:12px 18px;color:var(--green);border:1px solid rgba(72,255,139,.6);background:rgba(7,5,20,.92);transition:.25s}.toast.show{transform:translateX(-50%) translateY(0)}
+
+    /* Splash screen: blocks scroll until the soundtrack is started by a user gesture. */
+    body.splash-active{overflow:hidden;height:100vh;height:100svh}
+    .splash-screen{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 15% 8%,rgba(255,59,213,.24),transparent 30%),radial-gradient(circle at 85% 18%,rgba(24,215,255,.18),transparent 34%),linear-gradient(180deg,#05040d 0%,#0a0618 52%,#05040d 100%);transition:opacity .6s ease,visibility .6s ease}
+    .splash-screen:before,.splash-screen:after{content:"";position:absolute;inset:0;pointer-events:none}.splash-screen:before{background:linear-gradient(rgba(24,215,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,59,213,.04) 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(180deg,rgba(0,0,0,.72),rgba(0,0,0,.18))}.splash-screen:after{background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 5px);mix-blend-mode:screen;opacity:.4}
+    .splash-screen.is-hidden{opacity:0;visibility:hidden;pointer-events:none}
+    .splash-card{position:relative;z-index:1;width:min(620px,100%);padding:clamp(28px,6vw,48px);text-align:center;border:2px solid rgba(255,59,213,.68);background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 0 24px rgba(255,59,213,.35),0 0 64px rgba(157,77,255,.22);clip-path:polygon(0 var(--cut),var(--cut) 0,calc(100% - var(--cut)) 0,100% var(--cut),100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
+    .splash-eyebrow{margin-bottom:16px;color:var(--cyan);font-family:'Silkscreen';font-size:clamp(17px,2.5vw,22px);letter-spacing:.08em;text-transform:uppercase}.splash-title{margin-bottom:16px;color:var(--pink);font-family:'Press Start 2P';font-size:clamp(30px,6vw,50px);line-height:1.15;text-shadow:4px 4px 0 rgba(24,215,255,.35),0 0 28px rgba(255,59,213,.72)}.splash-text{margin-bottom:24px;color:var(--muted);font-size:clamp(24px,3vw,30px)}
+    .splash-start{width:min(100%,360px);min-height:64px;margin:auto;color:#041007;background:linear-gradient(90deg,var(--green),#9cff61);border-color:rgba(184,255,201,.9);box-shadow:0 0 22px rgba(72,255,139,.48);font-size:clamp(20px,3vw,26px)}
     @keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.08)}}@keyframes eq{0%,100%{height:10px}50%{height:42px}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
     body{background-position:center,center,center,center}
@@ -143,9 +152,18 @@
     @media(max-height:680px) and (max-width:640px){.player-card{min-height:350px}.player-sprite{min-height:220px}.player-sprite img{height:240px}.hero-copy{padding-top:18px;padding-bottom:18px}}
   </style>
 </head>
-<body>
+<body class="splash-active">
   <span class="float f1">♥</span><span class="float f2">★</span><span class="float f3">◆</span>
   <audio id="bgMusic" src="./musica/brave-heart-instrumental.mp4" loop preload="auto" autoplay playsinline></audio>
+  <!-- HTML: pantalla de bienvenida para habilitar audio con una interacción real del usuario. -->
+  <div class="splash-screen" id="splashScreen" role="dialog" aria-modal="true" aria-labelledby="splashTitle">
+    <div class="splash-card">
+      <p class="splash-eyebrow">Nueva partida desbloqueada</p>
+      <h1 class="splash-title" id="splashTitle">Flor &amp; Keke</h1>
+      <p class="splash-text">Nuestra aventura comienza aquí</p>
+      <button class="btn splash-start" type="button" id="startExperience">▶ PRESS START</button>
+    </div>
+  </div>
   <div class="arcade-particles" aria-hidden="true"></div>
   <header class="hud screen"><div><span class="hearts">♥♥♥</span><span>1UP</span><span class="hud-name">FLOR &amp; KEKE</span></div><div>CO-OP MODE: ON</div><div><span>LVL ∞</span><span>XP 14112026</span><span class="xpbar"><span></span></span></div></header><div class="page-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
   <main class="page">
@@ -160,7 +178,7 @@
     <section class="rsvp" id="rsvp"><div class="control" aria-hidden="true">🎮<span>♥ ♥</span></div><div class="rsvp-main"><h2>Confirmá tu asistencia</h2><p>Misión pendiente: te esperamos para completar la fiesta.</p><div class="deadline screen">DEADLINE: 24/10/2026</div><a class="btn green" href="https://script.google.com/macros/s/AKfycbxP4YHD_s0K0O-s_xzsGPmDbJ8VOKVsyVJAEEKIgHI79Ho6D9ROjAwwu47Aql6vWLRT/exec" target="_blank" rel="noopener">Confirmar asistencia ▶</a></div><div class="player-status screen"><span>Estado de jugador</span><strong>POR CONFIRMAR</strong><div class="empty"></div></div></section>
     <footer class="footer"><p>♥ Gracias por ser parte de nuestra aventura ♥</p><strong>Flor &amp; Keke · 14.11.2026</strong></footer>
   </main>
-  <button class="music" type="button" id="musicToggle" aria-label="Activar o pausar música">♪</button><div class="toast" id="toast">Copiado</div>
+  <button class="music" type="button" id="musicToggle" aria-label="Música desactivada">🔇</button><div class="toast" id="toast">Copiado</div>
   <div class="gallery-viewer" id="galleryViewer" aria-hidden="true"><button type="button" id="galleryClose" aria-label="Cerrar foto">X</button><img id="galleryViewerImg" alt="Foto ampliada de Flor y Keke"></div>
   <script>
     const targetDate = new Date('2026-11-14T20:00:00-03:00');
@@ -170,58 +188,50 @@
     tick(); setInterval(tick, 1000);
     const toast = document.getElementById('toast'); let tt;
     function show(msg){ toast.textContent = msg; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toast.classList.remove('show'), 1800); }
-    const music = document.getElementById('bgMusic'), musicToggle = document.getElementById('musicToggle'); let on = false, musicWanted = false;
-    function rememberMusic(value){
-      musicWanted = value;
-      try { sessionStorage.setItem('playWeddingMusic', value ? '1' : '0'); } catch(e) {}
+
+    // JavaScript: splash + audio controller. Browsers allow sound reliably only after a user gesture.
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const splashScreen = document.getElementById('splashScreen');
+    const startExperience = document.getElementById('startExperience');
+    let musicOn = false;
+    function updateMusicButton(){
+      musicToggle.textContent = musicOn ? '🔊' : '🔇';
+      musicToggle.classList.toggle('is-playing', musicOn);
+      musicToggle.setAttribute('aria-label', musicOn ? 'Música activada' : 'Música desactivada');
     }
-    async function startMusic(showBlocked = false){
+    async function playMusic({ restart = false } = {}){
       try {
         music.volume = .48;
+        if (restart) music.currentTime = 0;
         await music.play();
-        on = true;
-        rememberMusic(true);
-        musicToggle.classList.add('is-playing');
-        musicToggle.setAttribute('aria-label', 'Pausar música');
-        disarmMusicUnlock();
+        musicOn = true;
       } catch(e) {
-        on = false;
-        musicToggle.classList.remove('is-playing');
-        musicToggle.setAttribute('aria-label', 'Activar música');
-        if (showBlocked) show('Tocá ♪ para activar soundtrack');
+        musicOn = false;
       }
+      updateMusicButton();
+      return musicOn;
     }
-    function stopMusic(){
+    function pauseMusic(){
       music.pause();
-      on = false;
-      rememberMusic(false);
-      musicToggle.classList.remove('is-playing');
-      musicToggle.setAttribute('aria-label', 'Activar música');
+      musicOn = false;
+      updateMusicButton();
     }
-    function unlockMusic(){
-      if (!on && musicWanted) startMusic(false);
+    function revealInvitation(){
+      splashScreen.classList.add('is-hidden');
+      document.body.classList.remove('splash-active');
+      window.setTimeout(() => splashScreen.setAttribute('aria-hidden', 'true'), 600);
     }
-    function armMusicUnlock(){
-      document.addEventListener('pointerdown', unlockMusic, { passive: true });
-      document.addEventListener('touchstart', unlockMusic, { passive: true });
-      document.addEventListener('keydown', unlockMusic);
+    async function startInvitation(){
+      await playMusic({ restart: true });
+      revealInvitation();
     }
-    function disarmMusicUnlock(){
-      document.removeEventListener('pointerdown', unlockMusic);
-      document.removeEventListener('touchstart', unlockMusic);
-      document.removeEventListener('keydown', unlockMusic);
-    }
-    musicToggle.addEventListener('click', async () => { if(!on){ rememberMusic(true); await startMusic(true); } else { stopMusic(); } });
-    try {
-      musicWanted = sessionStorage.getItem('playWeddingMusic') !== '0';
-    } catch(e) {
-      musicWanted = true;
-    }
-    if (musicWanted) {
-      armMusicUnlock();
-      window.addEventListener('load', () => { startMusic(true); }, { once: true });
-    }
-    document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', () => { if (!on) { rememberMusic(true); startMusic(false); } }));
+    startExperience.addEventListener('click', startInvitation);
+    musicToggle.addEventListener('click', async () => { if (musicOn) { pauseMusic(); } else { await playMusic(); } });
+    window.addEventListener('load', async () => {
+      if (await playMusic({ restart: true })) revealInvitation();
+    }, { once: true });
+    updateMusicButton();
     document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(btn.dataset.copy); show('Dato copiado al portapapeles'); } catch(e) { show('No se pudo copiar automáticamente'); } }));
 
     document.body.classList.add('is-loaded');
