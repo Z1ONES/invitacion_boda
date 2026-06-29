@@ -145,7 +145,7 @@
 </head>
 <body>
   <span class="float f1">♥</span><span class="float f2">★</span><span class="float f3">◆</span>
-  <audio id="bgMusic" src="./musica/brave-heart-instrumental.mp4" loop preload="auto"></audio>
+  <audio id="bgMusic" src="./musica/brave-heart-instrumental.mp4" loop preload="auto" autoplay playsinline></audio>
   <div class="arcade-particles" aria-hidden="true"></div>
   <header class="hud screen"><div><span class="hearts">♥♥♥</span><span>1UP</span><span class="hud-name">FLOR &amp; KEKE</span></div><div>CO-OP MODE: ON</div><div><span>LVL ∞</span><span>XP 14112026</span><span class="xpbar"><span></span></span></div></header><div class="page-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
   <main class="page">
@@ -213,12 +213,14 @@
     }
     musicToggle.addEventListener('click', async () => { if(!on){ rememberMusic(true); await startMusic(true); } else { stopMusic(); } });
     try {
-      if (sessionStorage.getItem('playWeddingMusic') === '1') {
-        musicWanted = true;
-        armMusicUnlock();
-        window.addEventListener('load', () => { startMusic(false); }, { once: true });
-      }
-    } catch(e) {}
+      musicWanted = sessionStorage.getItem('playWeddingMusic') !== '0';
+    } catch(e) {
+      musicWanted = true;
+    }
+    if (musicWanted) {
+      armMusicUnlock();
+      window.addEventListener('load', () => { startMusic(true); }, { once: true });
+    }
     document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', () => { if (!on) { rememberMusic(true); startMusic(false); } }));
     document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', async () => { try { await navigator.clipboard.writeText(btn.dataset.copy); show('Dato copiado al portapapeles'); } catch(e) { show('No se pudo copiar automáticamente'); } }));
 
