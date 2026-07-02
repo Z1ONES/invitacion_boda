@@ -154,7 +154,7 @@
         term.textContent += char;
         if (char && char !== ' ' && j % 2 === 0) tickTypingSound();
         j++;
-        setTimeout(type, line.charAt(j - 1) === '█' ? 22 : 34);
+        setTimeout(type, line.charAt(j - 1) === '█' ? 13 : 20);
       } else {
         term.textContent += '\n';
         i++;
