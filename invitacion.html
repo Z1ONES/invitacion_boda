@@ -195,6 +195,7 @@
     const splashScreen = document.getElementById('splashScreen');
     const startExperience = document.getElementById('startExperience');
     let musicOn = false;
+    let invitationStarted = false;
     function updateMusicButton(){
       musicToggle.textContent = musicOn ? '🔊' : '🔇';
       musicToggle.classList.toggle('is-playing', musicOn);
@@ -222,9 +223,11 @@
       document.body.classList.remove('splash-active');
       window.setTimeout(() => splashScreen.setAttribute('aria-hidden', 'true'), 600);
     }
-    async function startInvitation(){
-      await playMusic({ restart: true });
+    function startInvitation(){
+      if (invitationStarted) return;
+      invitationStarted = true;
       revealInvitation();
+      playMusic({ restart: true });
     }
     startExperience.addEventListener('click', startInvitation);
     musicToggle.addEventListener('click', async () => { if (musicOn) { pauseMusic(); } else { await playMusic(); } });
